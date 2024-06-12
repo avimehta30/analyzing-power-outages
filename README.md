@@ -74,23 +74,28 @@ By following these steps, we ensured that the dataset was clean, consistent, and
 ## Exploratory Data Analysis (EDA)
 
 ### Distribution of Climate Regions
-![Climate Region Distribution](https://via.placeholder.com/800x600.png?text=Climate+Region+Distribution+Bar+Chart)
+First, I wanted to see the distribution of different climate regions.
+<iframe
+  src="assets/climate_region_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Relationship Between Outage Duration and Customers Affected
-![Outage Duration vs Customers Affected](https://via.placeholder.com/800x600.png?text=Outage+Duration+vs+Customers+Affected+Scatter+Plot)
+I also wanted to see the relationship between the duration of outages and the number of customers affected.
+<iframe
+  src="assets/outage_duration_vs_customers_affected.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Pivot Table of Outage Duration by Climate Region
-| CLIMATE.REGION        | Amount of Outages | Average Length of Outage Duration |
-|-----------------------|-------------------|-----------------------------------|
-| East North Central    | 100               | 2400.5                            |
-| East South Central    | 85                | 1800.3                            |
-| Middle Atlantic       | 75                | 2200.7                            |
-| Mountain              | 65                | 2000.4                            |
-| New England           | 50                | 2600.2                            |
-| Pacific               | 120               | 2300.9                            |
-| South Atlantic        | 90                | 2500.8                            |
-| West North Central    | 80                | 1900.6                            |
-| West South Central    | 70                | 2100.3                            |
-
-These visualizations and tables provide insights into the distribution and characteristics of the power outages in the dataset, helping us identify key trends and patterns for further analysis.
-
+To summarize the average duration and count of outages by climate region, I created a pivot table.
+<iframe
+  src="assets/pivot_table_climate_region.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
