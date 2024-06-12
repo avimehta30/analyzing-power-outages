@@ -51,7 +51,7 @@ Look at the distributions of relevant columns separately by using DataFrame oper
 Look at the statistics of pairs of columns to identify possible associations. For instance, you may create scatter plots and plot conditional distributions, or box-plots. You must plot at least two such plots in your notebook. The results of your bivariate analyses will be helpful in identifying interesting hypothesis tests!
 
 <iframe
-  src="assets/outage_duration_vs_customers_affected.html.html"
+  src="assets/outage_duration_vs_customers_affected.html"
   width="800"
   height="600"
   frameborder="0"
