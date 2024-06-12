@@ -1,4 +1,4 @@
-# Analyzing Power Outages
+# Analyzing Power Outages :electric_plug:
 Project for DSC80 UCSD
 by Christian Guerra and Avi Mehta
 
