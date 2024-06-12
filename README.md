@@ -135,7 +135,44 @@ The following plot shows the distribution of test statistics from the permutatio
 <iframe src="assets/permutation_test_CAUSE_CATEGORY.html" width="800" height="600" frameborder="0"></iframe>
 
 ## Hypothesis Testing
-We formulated and tested hypotheses to explore the relationship between various factors and the duration of power outages. Specifically, we examined how climate regions might affect outage durations.
+We formulated and tested hypotheses to explore the relationship between climate regions and the duration of power outages. Specifically, we examined if the climate region has an effect on the duration of power outages.
+
+### Null Hypothesis (H₀)
+The climate region has no effect on the duration of power outages.
+
+### Alternative Hypothesis (H₁)
+The climate region does have an effect on the duration of power outages.
+
+### Permutation Test
+To test these hypotheses, we performed a permutation test with the following steps:
+
+1. **Calculate the Observed Statistic:**
+   - We calculated the difference in means of `OUTAGE.DURATION` across different `CLIMATE.REGION` values.
+
+2. **Generate Permutation Samples:**
+   - We randomly shuffled the `CLIMATE.REGION` labels and recalculated the difference in means to generate a distribution of the test statistic under the null hypothesis.
+
+3. **Calculate P-value:**
+   - We computed the p-value by comparing the observed test statistic to the distribution of permuted test statistics.
+
+### Results
+The observed statistic and p-value obtained from the permutation test are as follows:
+
+- **Observed Statistic:** 931.7692073170731
+- **P-value:** 0.485
+
+#### Interpretation
+Since the p-value is greater than 0.05, we fail to reject the Null Hypothesis. This suggests that there is no significant effect of climate regions on the duration of power outages.
+
+### Graphical Representation
+The following plot shows the distribution of the test statistics from the permutation test for the `CLIMATE.REGION` column. The red dashed line represents the observed test statistic.
+
+<iframe src="assets/permutation_test_climate_region.html" width="800" height="600" frameborder="0"></iframe>
+
+This graphical representation further confirms our statistical findings. The observed test statistic falls well within the distribution of permuted statistics, indicating that the observed difference is not significantly different from what we would expect by random chance.
+
+Thus, we conclude that there is no significant evidence to suggest that climate regions have an effect on the duration of power outages.
+
 
 ## Modeling and Prediction
 Finally, we explored predictive modeling to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the cause of an outage based on given conditions, which can help energy companies implement preventative measures.
