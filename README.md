@@ -132,7 +132,7 @@ The following plot shows the distribution of test statistics from the permutatio
 #### Permutation Test: CAUSE.CATEGORY and Missingness of OUTAGE_DURATION
 The following plot shows the distribution of test statistics from the permutation test for the `CAUSE.CATEGORY` column. The red dashed line represents the observed test statistic.
 
-<iframe src="assets/permutation_test_cause.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="permutation_test_CAUSE_CATEGORY.html" width="800" height="600" frameborder="0"></iframe>
 
 ## Hypothesis Testing
 We formulated and tested hypotheses to explore the relationship between various factors and the duration of power outages. Specifically, we examined how climate regions might affect outage durations.
