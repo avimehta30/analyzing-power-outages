@@ -53,6 +53,14 @@ Look at the statistics of pairs of columns to identify possible associations. Fo
 #### Interesting Aggregates
 Choose columns to group and pivot by and examine aggregate statistics. Embed at least one grouped table or pivot table in your website and explain its significance.
 
+| CLIMATE.REGION     | Amount of Outages | Average Length of Outage Duration |
+|--------------------|-------------------|-----------------------------------|
+| Central            | 200               | 2697.722927                       |
+| East North Central | 138               | 5332.285495                       |
+| Northeast          | 350               | 2985.378258                       |
+| Northwest          | 132               | 1386.083210                       |
+| South              | 229               | 2835.499485                       |
+
 ## Assessment of Missingness
 
 ### NMAR Analysis
