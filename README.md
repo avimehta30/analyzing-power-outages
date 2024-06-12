@@ -167,7 +167,7 @@ Since the p-value is greater than 0.05, we fail to reject the Null Hypothesis. T
 ### Graphical Representation
 The following plot shows the distribution of the test statistics from the permutation test for the `CLIMATE.REGION` column. The red dashed line represents the observed test statistic.
 
-<iframe src="assets/permutation_test_climate_region.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/hypothesis_permutation.html.html" width="800" height="600" frameborder="0"></iframe>
 
 This graphical representation further confirms our statistical findings. The observed test statistic falls well within the distribution of permuted statistics, indicating that the observed difference is not significantly different from what we would expect by random chance.
 
