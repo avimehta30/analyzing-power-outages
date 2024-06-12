@@ -50,16 +50,24 @@ Look at the distributions of relevant columns separately by using DataFrame oper
 #### Bivariate Analysis
 Look at the statistics of pairs of columns to identify possible associations. For instance, you may create scatter plots and plot conditional distributions, or box-plots. You must plot at least two such plots in your notebook. The results of your bivariate analyses will be helpful in identifying interesting hypothesis tests!
 
+<iframe
+  src="assets/outage_duration_vs_customers_affected.html.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 #### Interesting Aggregates
 Choose columns to group and pivot by and examine aggregate statistics. Embed at least one grouped table or pivot table in your website and explain its significance.
 
 | CLIMATE.REGION     | Amount of Outages | Average Length of Outage Duration |
 |--------------------|-------------------|-----------------------------------|
-| Central            | 200               | 2697.722927                       |
-| East North Central | 138               | 5332.285495                       |
-| Northeast          | 350               | 2985.378258                       |
-| Northwest          | 132               | 1386.083210                       |
-| South              | 229               | 2835.499485                       |
+| Central            | 166               | 1424.870996                       |
+| East North Central | 110               | 2666.067258                       |
+| Northeast          | 296               | 1394.343880                       |
+| Northwest          | 125               | 1004.585496                       |
+| South              | 190               | 1211.802011                       |
+
 
 ## Assessment of Missingness
 
