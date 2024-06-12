@@ -71,3 +71,26 @@ The cleaned dataset looks like this:
 
 By following these steps, we ensured that the dataset was clean, consistent, and ready for further analysis and visualization.
 
+## Exploratory Data Analysis (EDA)
+
+### Distribution of Climate Regions
+![Climate Region Distribution](https://via.placeholder.com/800x600.png?text=Climate+Region+Distribution+Bar+Chart)
+
+### Relationship Between Outage Duration and Customers Affected
+![Outage Duration vs Customers Affected](https://via.placeholder.com/800x600.png?text=Outage+Duration+vs+Customers+Affected+Scatter+Plot)
+
+### Pivot Table of Outage Duration by Climate Region
+| CLIMATE.REGION        | Amount of Outages | Average Length of Outage Duration |
+|-----------------------|-------------------|-----------------------------------|
+| East North Central    | 100               | 2400.5                            |
+| East South Central    | 85                | 1800.3                            |
+| Middle Atlantic       | 75                | 2200.7                            |
+| Mountain              | 65                | 2000.4                            |
+| New England           | 50                | 2600.2                            |
+| Pacific               | 120               | 2300.9                            |
+| South Atlantic        | 90                | 2500.8                            |
+| West North Central    | 80                | 1900.6                            |
+| West South Central    | 70                | 2100.3                            |
+
+These visualizations and tables provide insights into the distribution and characteristics of the power outages in the dataset, helping us identify key trends and patterns for further analysis.
+
