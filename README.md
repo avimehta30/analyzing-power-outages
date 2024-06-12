@@ -33,8 +33,6 @@ Here is an example of the cleaned dataset:
 | 2012-06-19 04:30:00   | 2012-06-20 23:00:00         | MRO         | 68200.000000       | 2550.0          | East North Central | severe weather | -0.1          |
 | 2015-07-18 02:00:00   | 2015-07-19 07:00:00         | MRO         | 250000.000000      | 1740.0          | East North Central | severe weather | 1.2           |
 
-
-
 ### Exploratory Data Analysis (EDA)
 We conducted EDA to understand the distribution and characteristics of the outages, visualizing the data to identify key trends and patterns.
 
@@ -67,7 +65,6 @@ Choose columns to group and pivot by and examine aggregate statistics. Embed at 
 | Northeast          | 296               | 1394.343880                       |
 | Northwest          | 125               | 1004.585496                       |
 | South              | 190               | 1211.802011                       |
-
 
 ## Assessment of Missingness
 
@@ -159,7 +156,7 @@ To test these hypotheses, we performed a permutation test with the following ste
 The observed statistic and p-value obtained from the permutation test are as follows:
 
 - **Observed Statistic:** 931.7692073170731
-- **P-value:** 0.485
+- **P-value:** 0.453
 
 #### Interpretation
 Since the p-value is greater than 0.05, we fail to reject the Null Hypothesis. This suggests that there is no significant effect of climate regions on the duration of power outages.
@@ -173,7 +170,22 @@ This graphical representation further confirms our statistical findings. The obs
 
 Thus, we conclude that there is no significant evidence to suggest that climate regions have an effect on the duration of power outages.
 
+## Framing a Prediction Problem
+We framed a prediction problem to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the cause of an outage based on given conditions, which can help energy companies implement preventative measures.
 
-## Modeling and Prediction
-Finally, we explored predictive modeling to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the cause of an outage based on given conditions, which can help energy companies implement preventative measures.
+### Baseline Model
+We developed a baseline model using logistic regression to predict the cause of the power outages. The model used the following features: `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, `ANOMALY.LEVEL`, `CLIMATE.REGION`, and `NERC.REGION`. The performance of the model was evaluated using accuracy, precision, and recall metrics.
+
+### Final Model
+After evaluating the baseline model, we experimented with different machine learning algorithms, including decision trees and random forests. We also performed feature engineering to improve the model's performance. The final model was selected based on its ability to accurately predict the cause of power outages and its generalizability to new data.
+
+### Fairness Analysis
+Finally, we conducted a fairness analysis to ensure that the predictive model does not unfairly target or disadvantage any particular group. We examined the model's predictions across different demographic and geographic groups to identify any potential biases and took steps to mitigate them.
+
+## Conclusion
+Our analysis provides valuable insights into the causes and characteristics of major power outages in the United States. The cleaned and preprocessed dataset, along with our exploratory data analysis and hypothesis testing, helped us understand the key factors affecting power outages. Our predictive model can assist energy companies in implementing preventative measures to minimize the impact of power outages on customers.
+
+By conducting a fairness analysis, we ensured that our model is equitable and does not disproportionately affect certain groups. This comprehensive approach allows us to make informed recommendations for improving the resilience of the power grid and enhancing the reliability of electricity supply.
+
+Overall, our project demonstrates the importance of data-driven decision-making in addressing complex challenges in the energy sector.
 
