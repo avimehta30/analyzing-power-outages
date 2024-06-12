@@ -72,7 +72,7 @@ We conducted EDA to understand the distribution and characteristics of the outag
 ### Univariate Analysis
 - **Climate Region Distribution**:
 <iframe
-  src="https://raw.githubusercontent.com/chguerra15/graph1/main/images/climate_region_distribution.png"
+  src="assets/climate_region_distribution.html"
   width="800"
   height="600"
   frameborder="0"
