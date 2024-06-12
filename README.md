@@ -77,11 +77,12 @@ I also wanted to see the distribution of major causes of power outages.
 
 Next, I wanted to understand the distribution of climate regions affected by power outages.
 <iframe
-  src="assets/climate_region_distribution.html"
+  src="https://github.com/chguerra15/analyzing-power-outage/blob/main/climate_region_distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
 
 I also analyzed the relationship between outage duration and the number of customers affected.
 <iframe
