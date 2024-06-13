@@ -190,8 +190,25 @@ The features we will use in our model are:
 - `NERC.REGION`: North American Electric Reliability Corporation regions involved in the outage event.
 - `MONTH`: The month when the outage occurred.
 
-### Baseline Model
-We developed a baseline model using logistic regression to predict the cause of the power outages. The model used the following features: `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, `ANOMALY.LEVEL`, `CLIMATE.REGION`, and `NERC.REGION`. The performance of the model was evaluated using accuracy, precision, and recall metrics.
+## Baseline Model
+
+In this step, we developed a baseline model to predict the duration of power outages. The baseline model uses two features: `CLIMATE.REGION` and `CAUSE.CATEGORY`.
+
+### Features and Encoding
+- **CLIMATE.REGION** (categorical): Encoded using one-hot encoding to handle the categorical nature of the variable.
+- **CAUSE.CATEGORY** (categorical): Encoded using one-hot encoding for the same reason.
+
+### Data Splitting
+The dataset was split into training and test sets using a 70-30 split ratio to ensure the model's ability to generalize to unseen data.
+
+### Model Pipeline
+We created a pipeline using `scikit-learn` that includes preprocessing steps for encoding the categorical features and a linear regression model for prediction.
+
+### Model Training and Evaluation
+The pipeline was trained on the training set, and the model's performance was evaluated using the test set. The evaluation metric used was RMSE.
+
+### Results
+The RMSE obtained for the baseline model on the test set is `1363.7571213626188`. This serves as a benchmark for comparing more complex models that we will develop in subsequent steps.
 
 ### Final Model
 After evaluating the baseline model, we experimented with different machine learning algorithms, including decision trees and random forests. We also performed feature engineering to improve the model's performance. The final model was selected based on its ability to accurately predict the cause of power outages and its generalizability to new data.
