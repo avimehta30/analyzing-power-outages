@@ -71,7 +71,12 @@ This distribution highlights that some regions experience a higher frequency of 
 
 
 #### Bivariate Analysis
-Look at the statistics of pairs of columns to identify possible associations. For instance, you may create scatter plots and plot conditional distributions, or box-plots. You must plot at least two such plots in your notebook. The results of your bivariate analyses will be helpful in identifying interesting hypothesis tests!
+**Observations:**
+- The plot below shows a wide dispersion of points, indicating significant variability in both outage duration and the number of customers affected.
+- There are several clusters of points, especially around shorter outage durations (less than 1000 minutes) and varying numbers of affected customers.
+- Some points represent extreme values, with outages lasting up to 7000 minutes and affecting up to 300,000 customers.
+- The plot does not show a clear linear relationship between outage duration and the number of customers affected, suggesting that other factors may also play significant roles in determining the impact of power outages.
+
 
 <iframe src="assets/outage_duration_vs_customers_affected.html" width="800" height="600" frameborder="0"></iframe>
 
