@@ -369,7 +369,7 @@ We decided to use `RandomForestRegressor` as our final model based on its perfor
 
 - **Number of Estimators**: Number of trees in the forest. Tested values were [100, 200].
 - **Maximum Depth**: Maximum depth of the trees. Tested values were [10, 20].
-- min_samples_split: Minimum number of samples required to split an internal node. Tested values were [2, 5].
+- **min_samples_split**: Minimum number of samples required to split an internal node. Tested values were [2, 5].
 
 The best performing hyperparameters that resulted in the lowest Root Mean Squared Error (RMSE) achieved during the cross-validation process in GridSearchCV were:
 - n_estimators: 200
@@ -380,7 +380,7 @@ The best performing hyperparameters that resulted in the lowest Root Mean Square
 
 To identify the most effective features, we trained our model five times using various combinations of features. We then created a dictionary, where the keys represent the RMSE values and the corresponding feature combinations are the values. Finally, we sorted the dictionary in ascending order based on RMSE, ensuring the smallest RMSE appears first.
 
-Moreover, we trained our model using the same unseen and seen datasets from the baseline model. This ensured that the evaluation metric obtained on the final model could be compared to the baseline model's on the basis of the model itself and not the dataset it was trained on.
+We trained our model using the same unseen and seen datasets from the baseline model. This ensured that the evaluation metric obtained on the final model could be compared to the baseline model's on the basis of the model itself and not the dataset it was trained on.
 
 - ```python
     final_rmse_w_features = {}
@@ -445,8 +445,9 @@ Moreover, we trained our model using the same unseen and seen datasets from the 
 
 
 
+We graphed the RMSE’s of the five models, and graphed the the RSME of each model. As you can see in the graph, we found that the model with the lowest RSME has the features `CUSTOMERS.AFFECTED`, `CLIMATE.REGION`, `NERC.REGION`, `ANOMALY.LEVEL`, `CAUSE.CATEGORY`
 
-The final model's performance was evaluated using RMSE. The RMSE values for different models are shown in the plot below:
+The RMSE values for all of the different models are shown in the plot below:
 
 ![RMSE PLOT](assets/Screenshot 2024-06-12 at 7.22.29 PM.png)
 
