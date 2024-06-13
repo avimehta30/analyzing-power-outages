@@ -17,12 +17,12 @@ The original raw dataset contains 1534 rows, corresponding to 1534 outages, and 
 
 | Columns              | Description                                                                 |
 |----------------------|-----------------------------------------------------------------------------|
-| 'OUTAGE.DURATION'    | Duration of outage events (in minutes)                                       |
-| 'CUSTOMERS.AFFECTED' | Number of customers affected by the power outage event                       |
-| 'ANOMALY.LEVEL'      | Gravity of natural disaster on power outage                                  |
-| 'CLIMATE.REGION'     | U.S. Climate regions as specified by National Centers for Environmental Information |
-| 'CAUSE.CATEGORY'     | Categories of all the events causing the major power outages                 |
-| 'NERC.REGION'        | North American Electric Reliability Corporation (NERC) regions involved in the outage event |
+| `OUTAGE.DURATION`    | Duration of outage events (in minutes)                                       |
+| `CUSTOMERS.AFFECTED` | Number of customers affected by the power outage event                       |
+| `ANOMALY.LEVEL`      | Gravity of natural disaster on power outage                                  |
+| `CLIMATE.REGION`     | U.S. Climate regions as specified by National Centers for Environmental Information |
+| `CAUSE.CATEGORY`     | Categories of all the events causing the major power outages                 |
+| `NERC.REGION`        | North American Electric Reliability Corporation (NERC) regions involved in the outage event |
 
 ### Cleaned Data Example
 Here is an example of the cleaned dataset:
