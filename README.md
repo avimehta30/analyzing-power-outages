@@ -7,7 +7,7 @@ In this project, my team and I undertook a comprehensive analysis of a dataset c
 
 The central question of our project is: **"How does the climate region affect the duration of power outages?"**
 
-This question is particularly important because the duration of a power outage can have substantial effects on the affected population, including economic losses, disruptions to daily life, and risks to public safety. By identifying the key factors that influence outage duration, utility companies and policymakers can implement more effective strategies to mitigate these impacts and improve response times.
+This question is particularly important because the duration of a power outage can have substantial effects on the affected population, including economic losses, disruptions to daily life, and risks to public safety. By understanding how climate regions influence outage durations, utility companies and policymakers can develop targeted strategies to address vulnerabilities specific to different climatic conditions, ultimately improving the efficiency of response efforts and minimizing the impacts of outages.
 
 Our dataset provides detailed information on each outage event, including its causes, durations, and the geographical, climatic, and economic characteristics of the affected areas. Additionally, the dataset includes data on electricity consumption patterns and land-use characteristics, which add valuable context for our analysis. The dataset contains 1534 rows, each corresponding to a unique outage event, and 57 columns with detailed information about these events.
 
