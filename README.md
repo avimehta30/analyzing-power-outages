@@ -265,11 +265,12 @@ The features we will use in our model are:
 
 ## Baseline Model
 
+### Model Description
 In this step, we developed a baseline model to predict the duration of power outages. The baseline model uses two features: `CLIMATE.REGION` and `CAUSE.CATEGORY`.
 
 ### Features and Encoding
-- **CLIMATE.REGION** (categorical): Encoded using one-hot encoding to handle the categorical nature of the variable.
-- **CAUSE.CATEGORY** (categorical): Encoded using one-hot encoding for the same reason.
+- **CLIMATE.REGION** (Nominal): This feature represents the climate region where the outage occurred. Since it is a categorical variable, we performed one-hot encoding to convert it into a format suitable for the model.
+- **CAUSE.CATEGORY** (Nominal): This feature represents the cause of the outage. Similar to `CLIMATE.REGION`, we used one-hot encoding to handle the categorical nature of this variable.
 
 ### Data Splitting
 The dataset was split into training and test sets using a 70-30 split ratio to ensure the model's ability to generalize to unseen data.
@@ -278,10 +279,15 @@ The dataset was split into training and test sets using a 70-30 split ratio to e
 We created a pipeline using `scikit-learn` that includes preprocessing steps for encoding the categorical features and a linear regression model for prediction.
 
 ### Model Training and Evaluation
-The pipeline was trained on the training set, and the model's performance was evaluated using the test set. The evaluation metric used was RMSE.
+The pipeline was trained on the training set, and the model's performance was evaluated using the test set. The evaluation metric used was Root Mean Squared Error (RMSE).
 
-### Results
+### Performance Evaluation
 The RMSE obtained for the baseline model on the test set is `1363.7571213626188`. This serves as a benchmark for comparing more complex models that we will develop in subsequent steps.
+
+### Model Assessment
+Based on the RMSE value, the baseline model provides a starting point for understanding the factors affecting outage duration. While the current RMSE is relatively high, it is expected for a baseline model. This performance indicates that there is room for improvement, which we aim to achieve by incorporating additional features and performing hyperparameter tuning in the subsequent steps.
+
+The baseline model is "good" in the sense that it establishes a reference point for evaluating future models. It provides insights into the basic relationship between the climate region, the cause of the outage, and the duration of the outage. However, further refinement and feature engineering are necessary to enhance the model's predictive accuracy and reduce the RMSE.
 
 ## Final Model
 
