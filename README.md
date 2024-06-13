@@ -17,8 +17,6 @@ This question is particularly important because the duration of a power outage c
     data = data.drop(index=0)
     ```
 
-**Handling Missing Values:**
-
 2. **Mean Imputation for Numerical Columns:**
    For numerical columns, we replaced missing values with the mean value of each column. This included columns such as `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, `ANOMALY.LEVEL`, `POPULATION`, and `DEMAND.LOSS.MW`.
 
@@ -37,8 +35,6 @@ This question is particularly important because the duration of a power outage c
     for col in catagorical_col:
         data[col].fillna(data[col].mode()[0], inplace=True)
     ```
-
-**Creating Datetime Columns:**
 
 4. **Combining Date and Time Columns:**
    We combined `OUTAGE.START.DATE` and `OUTAGE.START.TIME` to create a single `OUTAGE_START_DATETIME` column, and similarly, combined `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` to create a single `OUTAGE_RESTORATION_DATETIME` column. This helped reduce redundancy and simplified the dataset.
