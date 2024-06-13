@@ -445,9 +445,10 @@ We trained our model using the same unseen and seen datasets from the baseline m
 
 
 
-We graphed the RMSE’s of the five models, and graphed the the RSME of each model. As you can see in the graph, we found that the model with the lowest RSME has the features `CUSTOMERS.AFFECTED`, `CLIMATE.REGION`, `NERC.REGION`, `ANOMALY.LEVEL`, `CAUSE.CATEGORY`
 
 The RMSE values for all of the different models are shown in the plot below:
+
+As you can see in the graph, the model with the lowest RSME has the features `CUSTOMERS.AFFECTED`, `CLIMATE.REGION`, `NERC.REGION`, `ANOMALY.LEVEL`, `CAUSE.CATEGORY`
 
 ![RMSE PLOT](assets/Screenshot 2024-06-12 at 7.22.29 PM.png)
 
