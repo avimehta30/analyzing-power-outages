@@ -75,13 +75,11 @@ This distribution highlights that some regions experience a higher frequency of 
 - The plot below shows a wide dispersion of points, indicating significant variability in both outage duration and the number of customers affected.
 - There are several clusters of points, especially around shorter outage durations (less than 1000 minutes) and varying numbers of affected customers.
 - Some points represent extreme values, with outages lasting up to 7000 minutes and affecting up to 300,000 customers.
-- The plot does not show a clear linear relationship between outage duration and the number of customers affected, suggesting that other factors may also play significant roles in determining the impact of power outages.
-
 
 <iframe src="assets/outage_duration_vs_customers_affected.html" width="800" height="600" frameborder="0"></iframe>
 
 #### Interesting Aggregates
-Choose columns to group and pivot by and examine aggregate statistics. Embed at least one grouped table or pivot table in your website and explain its significance.
+he pivot table displayed shows the impact of power outages in different U.S. states,summarized by the total number of customers affected, the average number of customers affected per outage, and the count of outages.
 
 | CLIMATE.REGION     | Amount of Outages | Average Length of Outage Duration |
 |--------------------|-------------------|-----------------------------------|
