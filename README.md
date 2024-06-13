@@ -171,7 +171,24 @@ This graphical representation further confirms our statistical findings. The obs
 Thus, we conclude that there is no significant evidence to suggest that climate regions have an effect on the duration of power outages.
 
 ## Framing a Prediction Problem
-We framed a prediction problem to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the cause of an outage based on given conditions, which can help energy companies implement preventative measures.
+We framed a prediction problem to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the duration of an outage based on given conditions, which can help energy companies implement preventative measures.
+
+### Prediction Task
+The specific prediction task is to predict the duration of a power outage based on the climate region, taking into account other relevant features.
+
+### Response Variable
+Our response variable is `OUTAGE.DURATION`, as this is the column we are trying to predict.
+
+### Evaluation Metric
+The metric we plan on using is Root Mean Squared Error (RMSE). RMSE is chosen because it penalizes large errors more due to the squaring of the residuals. This makes it a good choice for our problem where we want to minimize the difference between the actual and predicted duration of a power outage based on the climate region.
+
+### Features
+The features we will use in our model are:
+- `CLIMATE.REGION`: The U.S. Climate regions as specified by the National Centers for Environmental Information.
+- `CUSTOMERS.AFFECTED`: Number of customers affected by the power outage event.
+- `ANOMALY.LEVEL`: Gravity of natural disaster on power outage.
+- `NERC.REGION`: North American Electric Reliability Corporation regions involved in the outage event.
+- `MONTH`: The month when the outage occurred.
 
 ### Baseline Model
 We developed a baseline model using logistic regression to predict the cause of the power outages. The model used the following features: `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, `ANOMALY.LEVEL`, `CLIMATE.REGION`, and `NERC.REGION`. The performance of the model was evaluated using accuracy, precision, and recall metrics.
