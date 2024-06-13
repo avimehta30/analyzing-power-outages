@@ -57,19 +57,19 @@ The original raw dataset contains 1534 rows, corresponding to 1534 outages, and 
 
 | Columns | Description |
 | ------- | ----------- |
-| OUTAGE_START_DATETIME | Combined datetime of outage start |
-| OUTAGE_RESTORATION_DATETIME | Combined datetime of outage restoration |
-| NERC.REGION | North American Electric Reliability Corporation (NERC) regions involved in the outage event |
-| CUSTOMERS.AFFECTED | Number of customers affected by the power outage event |
-| OUTAGE.DURATION | Duration of outage events (in minutes) |
-| CLIMATE.REGION | U.S. Climate regions as specified by National Centers for Environmental Information |
-| CAUSE.CATEGORY | Categories of all the events causing the major power outages |
-| ANOMALY.LEVEL | Gravity of natural disaster on power outage |
-| U.S._STATE | State in which the outage occurred |
-| POPULATION | Population of the affected area |
-| DEMAND.LOSS.MW | Demand loss in megawatts |
-| MONTH | Month in which the outage occurred |
-| YEAR | Year in which the outage occurred |
+| `OUTAGE_START_DATETIME` | Combined datetime of outage start |
+| `OUTAGE_RESTORATION_DATETIME` | Combined datetime of outage restoration |
+| `NERC.REGION` | North American Electric Reliability Corporation (NERC) regions involved in the outage event |
+| `CUSTOMERS.AFFECTED` | Number of customers affected by the power outage event |
+| `OUTAGE.DURATION` | Duration of outage events (in minutes) |
+| `CLIMATE.REGION` | U.S. Climate regions as specified by National Centers for Environmental Information |
+| `CAUSE.CATEGORY` | Categories of all the events causing the major power outages |
+| `ANOMALY.LEVEL` | Gravity of natural disaster on power outage |
+| `U.S._STATE` | State in which the outage occurred |
+| `POPULATION` | Population of the affected area |
+| `DEMAND.LOSS.MW` | Demand loss in megawatts |
+| `MONTH` | Month in which the outage occurred |
+| `YEAR` | Year in which the outage occurred |
 
 ### Cleaned Data Example
 Here is an example of the cleaned dataset:
