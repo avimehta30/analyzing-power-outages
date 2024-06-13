@@ -2,6 +2,8 @@
 Project for DSC80 UCSD
 by Christian Guerra and Avi Mehta
 
+HELLOOOO
+
 ## Introduction
 In this project, my team and I undertook a comprehensive analysis of a dataset containing information about power outages across various states in the United States. Power outages are significant events that can have wide-ranging impacts on communities, economies, and public safety. Understanding the causes and characteristics of these outages is crucial for improving the resilience of the power grid and enhancing the reliability of electricity supply.
 
