@@ -9,8 +9,6 @@ The central question of our project is: **"How does the climate region affect th
 
 This question is particularly important because the duration of a power outage can have substantial effects on the affected population, including economic losses, disruptions to daily life, and risks to public safety. By understanding how climate regions influence outage durations, utility companies and policymakers can develop targeted strategies to address vulnerabilities specific to different climatic conditions, ultimately improving the efficiency of response efforts and minimizing the impacts of outages.
 
-## Data Cleaning and Exploratory Data Analysis
-
 ### Data Cleaning and Preprocessing
 We prepared the dataset by addressing missing values, converting data types, and creating new derived features such as combining date and time information into datetime columns.
 
