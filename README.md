@@ -15,43 +15,18 @@ This question is particularly important because the duration of a power outage c
  1. **Dropping the "Units" Row:**
    The first row after skipping the metadata contained units instead of data, so we dropped it.
 
-    ```python
-    data = data.drop(index=0)
-    ```
-
 2. **Mean Imputation for Numerical Columns:**
    For numerical columns, we replaced missing values with the mean value of each column. This included columns such as `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, `ANOMALY.LEVEL`, `POPULATION`, and `DEMAND.LOSS.MW`.
 
-    ```python
-    numerical_col = ['OUTAGE.DURATION', "CUSTOMERS.AFFECTED", "ANOMALY.LEVEL", 'POPULATION', 'DEMAND.LOSS.MW']
-    for col in numerical_col:
-        data[col] = pd.to_numeric(data[col])
-        data[col].fillna(data[col].mean(), inplace=True)
-    ```
 
 3. **Mode Imputation for Categorical Columns:**
    For categorical columns, we replaced missing values with the most frequent value (mode) of each column. This included columns such as `CLIMATE.REGION`, `CAUSE.CATEGORY`, `NERC.REGION`, `U.S._STATE`, and `MONTH`.
 
-    ```python
-    catagorical_col = ['CLIMATE.REGION', 'CAUSE.CATEGORY', 'NERC.REGION', 'U.S._STATE', 'MONTH']
-    for col in catagorical_col:
-        data[col].fillna(data[col].mode()[0], inplace=True)
-    ```
-
 4. **Combining Date and Time Columns:**
    We combined `OUTAGE.START.DATE` and `OUTAGE.START.TIME` to create a single `OUTAGE_START_DATETIME` column, and similarly, combined `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` to create a single `OUTAGE_RESTORATION_DATETIME` column. This helped reduce redundancy and simplified the dataset.
 
-    ```python
-    data['OUTAGE_START_DATETIME'] = pd.to_datetime(data['OUTAGE.START.DATE'] + ' ' + data['OUTAGE.START.TIME'], errors='coerce')
-    data['OUTAGE_RESTORATION_DATETIME'] = pd.to_datetime(data['OUTAGE.RESTORATION.DATE'] + ' ' + data['OUTAGE.RESTORATION.TIME'], errors='coerce')
-    ```
-
 5. **Dropping Old Date and Time Columns:**
    After creating the datetime columns, we dropped the original date and time columns to avoid redundancy.
-
-    ```python
-    data = data.drop(columns=['OUTAGE.START.DATE', 'OUTAGE.START.TIME', 'OUTAGE.RESTORATION.DATE', 'OUTAGE.RESTORATION.TIME'])
-    ```
 
 
 ### Data Description
@@ -284,47 +259,11 @@ The features used in our baseline model include both nominal variables. To incor
 
 - **CAUSE.CATEGORY** (Nominal): This feature represents the cause of the outage. Similar to `CLIMATE.REGION`, we applied one-hot encoding to `CAUSE.CATEGORY` to handle its categorical nature. By converting the cause categories into binary columns, the model can effectively process and utilize this information for prediction.
 
-- ```python
-    # Select features and response
-    features = data[['CLIMATE.REGION', "CAUSE.CATEGORY"]]
-    target = data['OUTAGE.DURATION']
-    ```
-
 ### Data Splitting
 To ensure that our model's performance is evaluated on unseen data, we split the dataset into training and test sets. We used a 70-30 split ratio, where 70% of the data was used for training the model, and 30% was reserved for testing. This split helps us assess the model's ability to generalize to new data and prevents overfitting to the training set.
 
-- ```python
-    # Split the data into training and test sets (70, 30)
-    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.3)
-    ```
-
 ### Model Pipeline
 We constructed a pipeline using `scikit-learn` to streamline the modeling process. The pipeline consists of preprocessing steps for encoding the categorical features and a linear regression model for prediction. The pipeline ensures that the data undergoes consistent preprocessing and modeling steps, making the process more efficient and reproducible.
-
-- ```python
-    # preprocessing for categorical columns
-    cat_processor = Pipeline([
-        ('encoder', OneHotEncoder(handle_unknown='ignore'))
-    ])
-  
-    # Combine preprocessing steps
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('cat', cat_processor, ['CLIMATE.REGION', "CAUSE.CATEGORY"])
-        ])
-  
-    # Create the pipeline
-    pipeline = Pipeline(steps=[
-       ('preprocessor', preprocessor),
-       ('regressor', LinearRegression())
-    ])
-
-    # Train the model
-    pipeline.fit(X_train, y_train)
-  
-    # Evaluate the model
-    y_pred = pipeline.predict(X_test)
-    ```
 
 The pipeline includes the following steps:
 1. **Preprocessor**: This step handles the one-hot encoding of the categorical features `CLIMATE.REGION` and `CAUSE.CATEGORY`.
@@ -382,70 +321,6 @@ To identify the most effective features, we trained our model five times using v
 
 We trained our model using the same unseen and seen datasets from the baseline model. This ensured that the evaluation metric obtained on the final model could be compared to the baseline model's on the basis of the model itself and not the dataset it was trained on.
 
-- ```python
-    final_rmse_w_features = {}
-    test_features = [['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', "ANOMALY.LEVEL",␣ ↪'POPULATION'],
-                     ['CAUSE.CATEGORY', 'NERC.REGION', "ANOMALY.LEVEL",␣ ↪'POPULATION'],
-                     ['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', 'NERC.REGION',␣ ↪"ANOMALY.LEVEL", 'CAUSE.CATEGORY'],
-                     ['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', 'NERC.REGION',␣ ↪"ANOMALY.LEVEL", 'POPULATION'],
-                     ['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', 'NERC.REGION',␣ ↪"ANOMALY.LEVEL", 'POPULATION', 'CAUSE.CATEGORY']
-                    ]
-  
-    for i in test_features:
-         # Define features and target
-         features = data[i]
-         target = data['OUTAGE.DURATION']
-  
-         # Split the data
-         X_train, X_test, y_train, y_test = train_test_split(features, target,␣ ↪test_size=0.3, random_state=42)
-  
-         # Preprocessing for numerical columns using quantiles
-         qnt_processor = Pipeline([('quantile', QuantileTransformer(n_quantiles=200,␣ ↪output_distribution='normal'))])
-  
-         # Preprocessing for categorical columns
-         cat_processor = Pipeline([('encoder',␣ ↪OneHotEncoder(handle_unknown='ignore'))])
-  
-         # Combine preprocessing
-         preprocessor = ColumnTransformer(
-             transformers=[
-                   ('qnt', qnt_processor, [val for val in i if val in ['CUSTOMERS. ↪AFFECTED', 'ANOMALY.LEVEL']]),
-                   ('cat', cat_processor, [val for val in i if val in ['CLIMATE. ↪REGION', 'CAUSE.CATEGORY', 'NERC.REGION']])
-                 ])
-  
-         # Define the model
-         model = RandomForestRegressor()
-  
-         pipeline = Pipeline(steps=[
-             ('preprocessor', preprocessor),
-             ('model', model)
-        ])
-  
-        # Define the grid search
-        param_grid = {
-            'model__n_estimators': [100, 200],
-            'model__max_depth': [5, 10],
-            'model__min_samples_split': [2, 5, 10]
-        }
-        grid_search = GridSearchCV(pipeline, param_grid, cv=5)
-  
-       # Fit the model
-       grid_search.fit(X_train, y_train)
-  
-       # Best model
-       best_model = grid_search.best_estimator_
-  
-       # Evaluate the model
-       y_pred = best_model.predict(X_test)
-
-       final_rmse_w_features[np.sqrt(mean_squared_error(y_test, y_pred))] = i
-  
-  sorted_dict_features = {k: final_rmse_w_features[k] for k in␣ ↪sorted(final_rmse_w_features)}
-    ```
-
-
-
-
-
 The RMSE values for all of the different models are shown in the plot below:
 
 As you can see in the graph, the model with the lowest RSME has the features `CUSTOMERS.AFFECTED`, `CLIMATE.REGION`, `NERC.REGION`, `ANOMALY.LEVEL`, `CAUSE.CATEGORY`
@@ -475,44 +350,6 @@ By carefully selecting features and tuning hyperparameters, we were able to crea
 
 ## Test Statistic and Significance Level
 - The test statistic is the absolute difference in RMSE between the two groups. The permutation test involves shuffling the ‘CAUSE.CATEGORY’ labels and recalculating this difference. The significance level we choose is 0.05 as it is a common metric of significance.
-- ```python
-      # Helper Function to calculate RMSE for each group
-      def calculate_rmse(group_indices):
-          return np.sqrt(mean_squared_error(y_test[group_indices],y_pred[group_indices]))
-    ```
-- ```python
-      X_test["CAUSE.CATEGORY"] = data["CAUSE.CATEGORY"]
-  
-      not_intentional = [
-          'severe weather',
-          'system operability disruption',
-          'equipment failure',
-          'fuel supply emergency'
-      ]
-
-      group_X_indices = X_test["CAUSE.CATEGORY"].isin(not_intentional)
-      group_Y_indices = ~X_test['CLIMATE.REGION'].isin(not_intentional)
-
-      rmse_X_original = calculate_rmse(group_X_indices)
-      rmse_Y_original = calculate_rmse(group_Y_indices)
-      observed_diff = abs(rmse_X_original - rmse_Y_original)
-  
-      # Permutation test
-      n_permutations = 1000
-      perm_diffs = []
-  
-      for i in range(n_permutations):
-          # Shuffle the 'CLIMATE.REGION' labels
-          shuffled_regions = np.random.permutation(X_test["CAUSE.CATEGORY"]) shuffled_regions = pd.Series(shuffled_regions, index=X_test.index)
-  
-          # Recalculate RMSE for the shuffled groups
-          rmse_X_perm = calculate_rmse(shuffled_regions.isin(not_intentional))
-          rmse_Y_perm = calculate_rmse(~shuffled_regions.isin(not_intentional))
-          perm_diffs.append(abs(rmse_X_perm - rmse_Y_perm))
-  
-      # Calculate p-value
-      p_value = np.mean([diff >= observed_diff for diff in perm_diffs])
-    ```
 
 ## P-Value and Conclusion
 - After performing the permutation test for 1,000 iterations, the p-value is determined by calculating the proportion of permutations in which the observed test statistic is at least as extreme as the test statistic from the original dataset.
