@@ -476,9 +476,9 @@ By carefully selecting features and tuning hyperparameters, we were able to crea
 ## Test Statistic and Significance Level
 - The test statistic is the absolute difference in RMSE between the two groups. The permutation test involves shuffling the ‘CAUSE.CATEGORY’ labels and recalculating this difference. The significance level we choose is 0.05 as it is a common metric of significance.
 - ```python
-     # Helper Function to calculate RMSE for each group
-     def calculate_rmse(group_indices):
-         return np.sqrt(mean_squared_error(y_test[group_indices],y_pred[group_indices]))
+      # Helper Function to calculate RMSE for each group
+      def calculate_rmse(group_indices):
+          return np.sqrt(mean_squared_error(y_test[group_indices],y_pred[group_indices]))
     ```
 - ```python
       X_test["CAUSE.CATEGORY"] = data["CAUSE.CATEGORY"]
