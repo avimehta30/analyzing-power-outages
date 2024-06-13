@@ -461,7 +461,67 @@ The plot above illustrates the RMSE values for different models, highlighting th
 By carefully selecting features and tuning hyperparameters, we were able to create a model that performs better than the baseline, thus demonstrating the importance of thoughtful feature engineering and model selection in predictive modeling.
 
 ### Fairness Analysis
-Finally, we conducted a fairness analysis to ensure that the predictive model does not unfairly target or disadvantage any particular group. We examined the model's predictions across different demographic and geographic groups to identify any potential biases and took steps to mitigate them.
+
+## Evaluation Metric
+- The evaluation metric used is the Root Mean Squared Error (RMSE), a standard measure for assessing the accuracy of a regression model. It quantifies the difference between the predicted values and the actual values.
+
+## Group Definition
+- **Group X** = not_intentional (contains severe weather, system operability disruption, equipment failure and fuel supply emergency)
+- **Group Y** = Everything else (intentional attack, public appeal, islanding)
+
+## Hypotheses
+- **Null Hypothesis (H0)**: The model is fair across the different CAUSE.CATEGORY. The RMSE for Group X and Group Y are approximatley the same, and any observed differences are due to random chance.
+- **Alternative Hypothesis (H1)**: The model is unfair, showing a significant difference in RMSE between Group X (not_intentional) and Group Y (Everything Else).
+
+## Test Statistic and Significance Level
+- The test statistic is the absolute difference in RMSE between the two groups. The permutation test involves shuffling the ‘CAUSE.CATEGORY’ labels and recalculating this difference. The significance level we choose is 0.05 as it is a common metric of significance.
+- ```python
+     # Helper Function to calculate RMSE for each group
+     def calculate_rmse(group_indices):
+         return np.sqrt(mean_squared_error(y_test[group_indices],y_pred[group_indices]))
+    ```
+- ```python
+      X_test["CAUSE.CATEGORY"] = data["CAUSE.CATEGORY"]
+  
+      not_intentional = [
+          'severe weather',
+          'system operability disruption',
+          'equipment failure',
+          'fuel supply emergency'
+      ]
+
+      group_X_indices = X_test["CAUSE.CATEGORY"].isin(not_intentional)
+      group_Y_indices = ~X_test['CLIMATE.REGION'].isin(not_intentional)
+
+      rmse_X_original = calculate_rmse(group_X_indices)
+      rmse_Y_original = calculate_rmse(group_Y_indices)
+      observed_diff = abs(rmse_X_original - rmse_Y_original)
+  
+      # Permutation test
+      n_permutations = 1000
+      perm_diffs = []
+  
+      for i in range(n_permutations):
+          # Shuffle the 'CLIMATE.REGION' labels
+          shuffled_regions = np.random.permutation(X_test["CAUSE.CATEGORY"]) shuffled_regions = pd.Series(shuffled_regions, index=X_test.index)
+  
+          # Recalculate RMSE for the shuffled groups
+          rmse_X_perm = calculate_rmse(shuffled_regions.isin(not_intentional))
+          rmse_Y_perm = calculate_rmse(~shuffled_regions.isin(not_intentional))
+          perm_diffs.append(abs(rmse_X_perm - rmse_Y_perm))
+  
+      # Calculate p-value
+      p_value = np.mean([diff >= observed_diff for diff in perm_diffs])
+    ```
+
+## P-Value and Conclusion
+- After performing the permutation test for 1,000 iterations, the p-value is determined by calculating the proportion of permutations in which the observed test statistic is at least as extreme as the test statistic from the original dataset.
+
+- **P-Value**: 0.15
+
+- **Conclusion**: With a p-value of 0.15, which is above the commonly used significance level of 0.05, we do not have sufficient evidence to reject the null hypothesis. This means that we cannot conclude that there is a significant difference in RMSE between the two groups, and the observed difference is likely due to random chance.
+
+
 
 ## Report Conclusion
 Our analysis provides valuable insights into the causes and characteristics of major power outages in the United States. The cleaned and preprocessed dataset, along with our exploratory data analysis and hypothesis testing, helped us understand the key factors affecting power outages. Our predictive model can assist energy companies in implementing preventative measures to minimize the impact of power outages on customers.
