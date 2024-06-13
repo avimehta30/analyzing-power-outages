@@ -346,12 +346,15 @@ The baseline model is considered "good" in the context of establishing a referen
 
 In this section, we create a "final" model that improves upon the "baseline" model created in the Baseline Model step. We do so by engineering at least two new features from the data, on top of any categorical encodings performed in the Baseline Model Step.
 
-### Feature Engineering
+### New Features
 
-We engineered the following new features:
+We added the following features:
 
-1. **Population Density**: We calculated population density by dividing the population of the affected area by its land area. This feature was chosen because areas with higher population densities might have different outage characteristics.
-2. **Seasonality**: We created a seasonality feature based on the month of the year. This feature was chosen to account for seasonal variations in weather and electricity demand.
+- `CUSTOMERS.AFFECTED`: This feature directly measures the number of customers affected by each outage event. The rationale for this is as the amount of customers affected by a power outage increases, the duration decreases due to the severity of the outage
+- `NERC.REGION`: The rational for adding this feature is that different NERC regions may have varying infrastructure quality and resilience. Some regions might have more robust systems that can restore power more quickly.
+- `ANOMALY.LEVEL`: Anomaly levels often indicate extreme weather or environmental conditions (e.g., unusually high temperatures, severe storms, or other unusual weather events) which can significantly impact the power grid's stability and lead to longer outages.
+- `POPULATION`: The total population in the affected area can be a crucial factor in predicting the duration of an outage. Areas with higher populations might have more robust infrastructure to handle outages, meaning they have lower outages durations.
+- `CAUSE.CATEGORY`: Different causes of outages (e.g., weather-related, equipment failure, human error) have distinct characteristics and challenges. Understanding the cause helps in estimating how long it might take to address the issue.
 
 ### Model Selection and Hyperparameter Tuning
 
@@ -364,12 +367,84 @@ To select the best model, we considered several different modeling algorithms an
 
 We decided to use `RandomForestRegressor` as our final model based on its performance during the tuning process. Below, we describe the hyperparameters tuned and the rationale behind their selection:
 
-- **Number of Estimators**: Chosen to ensure a balance between computational efficiency and model performance.
-- **Maximum Depth**: Tuned to control overfitting and capture complex interactions in the data.
+- **Number of Estimators**: Number of trees in the forest. Tested values were [100, 200].
+- **Maximum Depth**: Maximum depth of the trees. Tested values were [10, 20].
+- min_samples_split: Minimum number of samples required to split an internal node. Tested values were [2, 5].
+
+The best performing hyperparameters that resulted in the lowest Root Mean Squared Error (RMSE) achieved during the cross-validation process in GridSearchCV were:
+- n_estimators: 200
+- max_depth: 10
+- min_samples_split: 10
 
 ### Training and Evaluation
 
-We trained the final model using the same unseen and seen datasets from the baseline model. This ensured that the evaluation metric obtained on the final model could be compared to the baseline model's on the basis of the model itself and not the dataset it was trained on.
+To identify the most effective features, we trained our model five times using various combinations of features. We then created a dictionary, where the keys represent the RMSE values and the corresponding feature combinations are the values. Finally, we sorted the dictionary in ascending order based on RMSE, ensuring the smallest RMSE appears first.
+
+Moreover, we trained our model using the same unseen and seen datasets from the baseline model. This ensured that the evaluation metric obtained on the final model could be compared to the baseline model's on the basis of the model itself and not the dataset it was trained on.
+
+- ```python
+    final_rmse_w_features = {}
+    test_features = [['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', "ANOMALY.LEVEL",␣ ↪'POPULATION'],
+                     ['CAUSE.CATEGORY', 'NERC.REGION', "ANOMALY.LEVEL",␣ ↪'POPULATION'],
+                     ['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', 'NERC.REGION',␣ ↪"ANOMALY.LEVEL", 'CAUSE.CATEGORY'],
+                     ['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', 'NERC.REGION',␣ ↪"ANOMALY.LEVEL", 'POPULATION'],
+                     ['CUSTOMERS.AFFECTED', 'CLIMATE.REGION', 'NERC.REGION',␣ ↪"ANOMALY.LEVEL", 'POPULATION', 'CAUSE.CATEGORY']
+                    ]
+  
+    for i in test_features:
+         # Define features and target
+         features = data[i]
+         target = data['OUTAGE.DURATION']
+  
+         # Split the data
+         X_train, X_test, y_train, y_test = train_test_split(features, target,␣ ↪test_size=0.3, random_state=42)
+  
+         # Preprocessing for numerical columns using quantiles
+         qnt_processor = Pipeline([('quantile', QuantileTransformer(n_quantiles=200,␣ ↪output_distribution='normal'))])
+  
+         # Preprocessing for categorical columns
+         cat_processor = Pipeline([('encoder',␣ ↪OneHotEncoder(handle_unknown='ignore'))])
+  
+         # Combine preprocessing
+         preprocessor = ColumnTransformer(
+             transformers=[
+                   ('qnt', qnt_processor, [val for val in i if val in ['CUSTOMERS. ↪AFFECTED', 'ANOMALY.LEVEL']]),
+                   ('cat', cat_processor, [val for val in i if val in ['CLIMATE. ↪REGION', 'CAUSE.CATEGORY', 'NERC.REGION']])
+                 ])
+  
+         # Define the model
+         model = RandomForestRegressor()
+  
+         pipeline = Pipeline(steps=[
+             ('preprocessor', preprocessor),
+             ('model', model)
+        ])
+  
+        # Define the grid search
+        param_grid = {
+            'model__n_estimators': [100, 200],
+            'model__max_depth': [5, 10],
+            'model__min_samples_split': [2, 5, 10]
+        }
+        grid_search = GridSearchCV(pipeline, param_grid, cv=5)
+  
+       # Fit the model
+       grid_search.fit(X_train, y_train)
+  
+       # Best model
+       best_model = grid_search.best_estimator_
+  
+       # Evaluate the model
+       y_pred = best_model.predict(X_test)
+
+       final_rmse_w_features[np.sqrt(mean_squared_error(y_test, y_pred))] = i
+  
+  sorted_dict_features = {k: final_rmse_w_features[k] for k in␣ ↪sorted(final_rmse_w_features)}
+    ```
+
+
+
+
 
 The final model's performance was evaluated using RMSE. The RMSE values for different models are shown in the plot below:
 
