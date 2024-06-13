@@ -5,7 +5,7 @@ by Christian Guerra and Avi Mehta
 ## Introduction
 In this project, my team and I undertook a comprehensive analysis of a dataset containing information about power outages across various states in the United States. Power outages are significant events that can have wide-ranging impacts on communities, economies, and public safety. Understanding the causes and characteristics of these outages is crucial for improving the resilience of the power grid and enhancing the reliability of electricity supply.
 
-The central question of our project is: **"What factors influence the duration of power outages?"**
+The central question of our project is: **"How does the climate region affect the duration of power outages?"**
 
 This question is particularly important because the duration of a power outage can have substantial effects on the affected population, including economic losses, disruptions to daily life, and risks to public safety. By identifying the key factors that influence outage duration, utility companies and policymakers can implement more effective strategies to mitigate these impacts and improve response times.
 
