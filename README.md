@@ -10,7 +10,51 @@ The central question of our project is: **"How does the climate region affect th
 This question is particularly important because the duration of a power outage can have substantial effects on the affected population, including economic losses, disruptions to daily life, and risks to public safety. By understanding how climate regions influence outage durations, utility companies and policymakers can develop targeted strategies to address vulnerabilities specific to different climatic conditions, ultimately improving the efficiency of response efforts and minimizing the impacts of outages.
 
 ### Data Cleaning and Preprocessing
-We prepared the dataset by addressing missing values, converting data types, and creating new derived features such as combining date and time information into datetime columns.
+ 1. **Dropping the "Units" Row:**
+   The first row after skipping the metadata contained units instead of data, so we dropped it.
+
+    ```python
+    data = data.drop(index=0)
+    ```
+
+**Handling Missing Values:**
+
+2. **Mean Imputation for Numerical Columns:**
+   For numerical columns, we replaced missing values with the mean value of each column. This included columns such as `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, `ANOMALY.LEVEL`, `POPULATION`, and `DEMAND.LOSS.MW`.
+
+    ```python
+    numerical_col = ['OUTAGE.DURATION', "CUSTOMERS.AFFECTED", "ANOMALY.LEVEL", 'POPULATION', 'DEMAND.LOSS.MW']
+    for col in numerical_col:
+        data[col] = pd.to_numeric(data[col])
+        data[col].fillna(data[col].mean(), inplace=True)
+    ```
+
+3. **Mode Imputation for Categorical Columns:**
+   For categorical columns, we replaced missing values with the most frequent value (mode) of each column. This included columns such as `CLIMATE.REGION`, `CAUSE.CATEGORY`, `NERC.REGION`, `U.S._STATE`, and `MONTH`.
+
+    ```python
+    catagorical_col = ['CLIMATE.REGION', 'CAUSE.CATEGORY', 'NERC.REGION', 'U.S._STATE', 'MONTH']
+    for col in catagorical_col:
+        data[col].fillna(data[col].mode()[0], inplace=True)
+    ```
+
+**Creating Datetime Columns:**
+
+4. **Combining Date and Time Columns:**
+   We combined `OUTAGE.START.DATE` and `OUTAGE.START.TIME` to create a single `OUTAGE_START_DATETIME` column, and similarly, combined `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` to create a single `OUTAGE_RESTORATION_DATETIME` column. This helped reduce redundancy and simplified the dataset.
+
+    ```python
+    data['OUTAGE_START_DATETIME'] = pd.to_datetime(data['OUTAGE.START.DATE'] + ' ' + data['OUTAGE.START.TIME'], errors='coerce')
+    data['OUTAGE_RESTORATION_DATETIME'] = pd.to_datetime(data['OUTAGE.RESTORATION.DATE'] + ' ' + data['OUTAGE.RESTORATION.TIME'], errors='coerce')
+    ```
+
+5. **Dropping Old Date and Time Columns:**
+   After creating the datetime columns, we dropped the original date and time columns to avoid redundancy.
+
+    ```python
+    data = data.drop(columns=['OUTAGE.START.DATE', 'OUTAGE.START.TIME', 'OUTAGE.RESTORATION.DATE', 'OUTAGE.RESTORATION.TIME'])
+    ```
+
 
 ### Data Description
 The original raw dataset contains 1534 rows, corresponding to 1534 outages, and 57 columns. For the purpose of our analysis, we focused on the following columns:
