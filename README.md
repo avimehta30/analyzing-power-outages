@@ -3,30 +3,30 @@ Project for DSC80 UCSD
 by Christian Guerra and Avi Mehta
 
 ## Introduction
-In this project, my team and I analyzed a dataset containing the power outages throughout various states in the United States. The dataset provides comprehensive information on the outages, including details about their causes, durations, and the geographical, climatic, and economic characteristics of the affected areas. Additionally, the dataset includes data on electricity consumption patterns and land-use characteristics, offering a rich context for our analysis.
+In this project, my team and I analyzed a dataset containing power outages throughout various states in the United States. The dataset provides comprehensive information on the outages, including details about their causes, durations, and the geographical, climatic, and economic characteristics of the affected areas. Additionally, the dataset includes data on electricity consumption patterns and land-use characteristics, offering a rich context for our analysis.
 
 ## Data Cleaning and Exploratory Data Analysis
 
 ### Data Cleaning and Preprocessing
 We prepared the dataset by addressing missing values, converting data types, and creating new derived features such as combining date and time information into datetime columns.
 
-## Data Description
+### Data Description
 The original raw dataset contains 1534 rows, corresponding to 1534 outages, and 57 columns. For the purpose of our analysis, we focused on the following columns:
 
-| Columns | Description |
-| ------- | ----------- |
-| 'OUTAGE.DURATION' | Duration of outage events (in minutes) |
-| 'CUSTOMERS.AFFECTED'| Number of customers affected by the power outage event |
-| 'ANOMALY.LEVEL' | Gravity of natural disaster on power outage |
-| 'CLIMATE.REGION' | U.S. Climate regions as specified by National Centers for Environmental Information |
-| 'CAUSE.CATEGORY' | Categories of all the events causing the major power outages |
-| 'NERC.REGION' | North American Electric Reliability Corporation (NERC) regions involved in the outage event |
+| Columns              | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| 'OUTAGE.DURATION'    | Duration of outage events (in minutes)                                       |
+| 'CUSTOMERS.AFFECTED' | Number of customers affected by the power outage event                       |
+| 'ANOMALY.LEVEL'      | Gravity of natural disaster on power outage                                  |
+| 'CLIMATE.REGION'     | U.S. Climate regions as specified by National Centers for Environmental Information |
+| 'CAUSE.CATEGORY'     | Categories of all the events causing the major power outages                 |
+| 'NERC.REGION'        | North American Electric Reliability Corporation (NERC) regions involved in the outage event |
 
 ### Cleaned Data Example
 Here is an example of the cleaned dataset:
 
 | OUTAGE_START_DATETIME | OUTAGE_RESTORATION_DATETIME | NERC.REGION | CUSTOMERS.AFFECTED | OUTAGE.DURATION | CLIMATE.REGION | CAUSE.CATEGORY | ANOMALY.LEVEL |
-| --------------------- | --------------------------- | ----------- | ------------------ | --------------- | -------------- | -------------- | ------------ |
+|-----------------------|-----------------------------|-------------|--------------------|-----------------|----------------|----------------|---------------|
 | 2011-07-01 17:00:00   | 2011-07-03 20:00:00         | MRO         | 70000.000000       | 3060.0          | East North Central | severe weather | -0.3          |
 | 2014-05-11 18:38:00   | 2014-05-11 18:39:00         | MRO         | 143456.222731      | 1.0             | East North Central | intentional attack | -0.1          |
 | 2010-10-26 20:00:00   | 2010-10-28 22:00:00         | MRO         | 70000.000000       | 3000.0          | East North Central | severe weather | -1.5          |
@@ -38,22 +38,13 @@ We conducted EDA to understand the distribution and characteristics of the outag
 
 #### Univariate Analysis
 Look at the distributions of relevant columns separately by using DataFrame operations and drawing at least two relevant plots.
-<iframe
-  src="assets/climate_region_distribution.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+
+<iframe src="assets/climate_region_distribution.html" width="800" height="600" frameborder="0"></iframe>
 
 #### Bivariate Analysis
 Look at the statistics of pairs of columns to identify possible associations. For instance, you may create scatter plots and plot conditional distributions, or box-plots. You must plot at least two such plots in your notebook. The results of your bivariate analyses will be helpful in identifying interesting hypothesis tests!
 
-<iframe
-  src="assets/outage_duration_vs_customers_affected.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+<iframe src="assets/outage_duration_vs_customers_affected.html" width="800" height="600" frameborder="0"></iframe>
 
 #### Interesting Aggregates
 Choose columns to group and pivot by and examine aggregate statistics. Embed at least one grouped table or pivot table in your website and explain its significance.
@@ -218,22 +209,22 @@ In this section, we create a "final" model that improves upon the "baseline" mod
 
 We engineered the following new features:
 
-1. **Feature 1**: Explanation of the new feature and why it was chosen.
-2. **Feature 2**: Explanation of the new feature and why it was chosen.
+1. **Population Density**: We calculated population density by dividing the population of the affected area by its land area. This feature was chosen because areas with higher population densities might have different outage characteristics.
+2. **Seasonality**: We created a seasonality feature based on the month of the year. This feature was chosen to account for seasonal variations in weather and electricity demand.
 
 ### Model Selection and Hyperparameter Tuning
 
 To select the best model, we considered several different modeling algorithms and performed hyperparameter tuning using `GridSearchCV`. The algorithms considered include:
 
 - **Linear Regression**
-- **Random Forest Classifier**
+- **Random Forest Regressor**
 - **Lasso**
-- **SVC**
+- **Support Vector Regressor (SVR)**
 
 We decided to use `RandomForestRegressor` as our final model based on its performance during the tuning process. Below, we describe the hyperparameters tuned and the rationale behind their selection:
 
-- **Hyperparameter 1**: Explanation of why this hyperparameter was chosen and its effect on the model.
-- **Hyperparameter 2**: Explanation of why this hyperparameter was chosen and its effect on the model.
+- **Number of Estimators**: Chosen to ensure a balance between computational efficiency and model performance.
+- **Maximum Depth**: Tuned to control overfitting and capture complex interactions in the data.
 
 ### Training and Evaluation
 
@@ -241,7 +232,7 @@ We trained the final model using the same unseen and seen datasets from the base
 
 The final model's performance was evaluated using RMSE. The RMSE values for different models are shown in the plot below:
 
-![RMSE PLOT](assets/Screenshot 2024-06-12 at 7.22.29 PM.png)
+![RMSE PLOT](assets/rmse_plot.png)
 
 ### Conclusion
 
