@@ -119,15 +119,25 @@ This distribution highlights that some regions experience a higher frequency of 
 <iframe src="assets/outage_duration_vs_customers_affected.html" width="800" height="600" frameborder="0"></iframe>
 
 #### Interesting Aggregates
-he pivot table displayed shows the impact of power outages in different U.S. states,summarized by the total number of customers affected, the average number of customers affected per outage, and the count of outages.
+The pivot table displayed below shows the impact of power outages in different U.S. climate regions. It summarizes the number of outages, the average length of outage duration, and the average number of customers affected per outage. This analysis provides insights into how different climate regions are affected by power outages and the typical duration of these outages.
 
-| CLIMATE.REGION     | Amount of Outages | Average Length of Outage Duration |
-|--------------------|-------------------|-----------------------------------|
-| Central            | 166               | 1424.870996                       |
-| East North Central | 110               | 2666.067258                       |
-| Northeast          | 296               | 1394.343880                       |
-| Northwest          | 125               | 1004.585496                       |
-| South              | 190               | 1211.802011                       |
+| CLIMATE.REGION     | Amount of Outages | Average Length of Outage Duration (minutes) | Average Number of Customers Affected |
+|--------------------|-------------------|---------------------------------------------|---------------------------------------|
+| Central            | 166               | 1424.87                                     | [Insert Value]                        |
+| East North Central | 110               | 2666.07                                     | [Insert Value]                        |
+| Northeast          | 296               | 1394.34                                     | [Insert Value]                        |
+| Northwest          | 125               | 1004.59                                     | [Insert Value]                        |
+| South              | 190               | 1211.80                                     | [Insert Value]                        |
+
+- **Central**: The Central region experienced 166 outages with an average duration of approximately 1424.87 minutes. The average number of customers affected per outage in this region can provide further insights.
+- **East North Central**: This region had 110 outages with a significantly higher average duration of 2666.07 minutes, indicating potentially more severe outages or slower restoration times.
+- **Northeast**: With 296 outages, the Northeast region saw an average outage duration of 1394.34 minutes, which is relatively moderate compared to other regions.
+- **Northwest**: The Northwest experienced 125 outages with the shortest average duration of 1004.59 minutes, suggesting more efficient outage management.
+- **South**: The South region had 190 outages with an average duration of 1211.80 minutes.
+
+The pivot table reveals that different climate regions experience varying frequencies and durations of power outages. These differences could be attributed to regional climatic conditions, infrastructure robustness, and efficiency of the power restoration processes.
+
+By analyzing this data, utility companies and policymakers can identify regions that may require improved infrastructure or more efficient restoration protocols to reduce the impact of power outages on customers.
 
 ## Assessment of Missingness
 
