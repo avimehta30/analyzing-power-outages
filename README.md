@@ -292,9 +292,10 @@ The features used in our baseline model include both nominal variables. To incor
 
 ### Data Splitting
 To ensure that our model's performance is evaluated on unseen data, we split the dataset into training and test sets. We used a 70-30 split ratio, where 70% of the data was used for training the model, and 30% was reserved for testing. This split helps us assess the model's ability to generalize to new data and prevents overfitting to the training set.
-```python
-   # Split the data into training and test sets (70, 30)
-   X_train, X_test, y_train, y_test = train_test_split(features, target,␣ ↪test_size=0.3)
+
+- ```python
+    # Split the data into training and test sets (70, 30)
+    X_train, X_test, y_train, y_test = train_test_split(features, target,␣ ↪test_size=0.3)
     ```
 
 ### Model Pipeline
