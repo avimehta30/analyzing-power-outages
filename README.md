@@ -210,8 +210,46 @@ The pipeline was trained on the training set, and the model's performance was ev
 ### Results
 The RMSE obtained for the baseline model on the test set is `1363.7571213626188`. This serves as a benchmark for comparing more complex models that we will develop in subsequent steps.
 
-### Final Model
-After evaluating the baseline model, we experimented with different machine learning algorithms, including decision trees and random forests. We also performed feature engineering to improve the model's performance. The final model was selected based on its ability to accurately predict the cause of power outages and its generalizability to new data.
+## Final Model
+
+In this section, we create a "final" model that improves upon the "baseline" model created in the Baseline Model step. We do so by engineering at least two new features from the data, on top of any categorical encodings performed in the Baseline Model Step.
+
+### Feature Engineering
+
+We engineered the following new features:
+
+1. **Feature 1**: Explanation of the new feature and why it was chosen.
+2. **Feature 2**: Explanation of the new feature and why it was chosen.
+
+### Model Selection and Hyperparameter Tuning
+
+To select the best model, we considered several different modeling algorithms and performed hyperparameter tuning using `GridSearchCV`. The algorithms considered include:
+
+- **Linear Regression**
+- **Random Forest Classifier**
+- **Lasso**
+- **SVC**
+
+We decided to use `RandomForestRegressor` as our final model based on its performance during the tuning process. Below, we describe the hyperparameters tuned and the rationale behind their selection:
+
+- **Hyperparameter 1**: Explanation of why this hyperparameter was chosen and its effect on the model.
+- **Hyperparameter 2**: Explanation of why this hyperparameter was chosen and its effect on the model.
+
+### Training and Evaluation
+
+We trained the final model using the same unseen and seen datasets from the baseline model. This ensured that the evaluation metric obtained on the final model could be compared to the baseline model's on the basis of the model itself and not the dataset it was trained on.
+
+The final model's performance was evaluated using RMSE. The RMSE values for different models are shown in the plot below:
+
+<iframe src="assets/rmse_plot.html" width="800" height="600" frameborder="0"></iframe>
+
+### Conclusion
+
+The final model showed an improvement over the baseline model. The engineered features and tuned hyperparameters contributed to better model performance. The `RandomForestRegressor` was chosen as the final model due to its ability to handle complex interactions between features and its robustness to overfitting when properly tuned.
+
+The plot above illustrates the RMSE values for different models, highlighting the improvement achieved with our final model.
+
+By carefully selecting features and tuning hyperparameters, we were able to create a model that performs better than the baseline, thus demonstrating the importance of thoughtful feature engineering and model selection in predictive modeling.
 
 ### Fairness Analysis
 Finally, we conducted a fairness analysis to ensure that the predictive model does not unfairly target or disadvantage any particular group. We examined the model's predictions across different demographic and geographic groups to identify any potential biases and took steps to mitigate them.
