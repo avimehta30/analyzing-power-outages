@@ -324,7 +324,6 @@ We constructed a pipeline using `scikit-learn` to streamline the modeling proces
   
     # Evaluate the model
     y_pred = pipeline.predict(X_test)
-    print('Test RMSE:', np.sqrt(mean_squared_error(y_test, y_pred)))
     ```
 
 The pipeline includes the following steps:
