@@ -241,7 +241,7 @@ We trained the final model using the same unseen and seen datasets from the base
 
 The final model's performance was evaluated using RMSE. The RMSE values for different models are shown in the plot below:
 
-<iframe src="assets/rmse_plot.html" width="500" height="500" frameborder="0"></iframe>
+![RMSE PLOT](Screenshot 2024-06-12 at 7.22.29 PM.png)
 
 ### Conclusion
 
