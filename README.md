@@ -252,7 +252,7 @@ This graphical representation further confirms our statistical findings. The obs
 Thus, we conclude that there is no significant evidence to suggest that climate regions have an effect on the duration of power outages.
 
 ## Framing a Prediction Problem
-We framed a prediction problem to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the duration of an outage based on given conditions, which can help energy companies implement preventative measures.
+We framed a prediction problem to identify the most important causes and characteristics of major power outages. The goal was to build a model that can predict the duration of an outage based on given conditions, which can help energy companies implement preventative measures. For this prediction problem, we will use regression.
 
 ### Prediction Task
 The specific prediction task is to predict the duration of a power outage based on the climate region, taking into account other relevant features.
@@ -269,7 +269,8 @@ The features we will use in our model are:
 - `CUSTOMERS.AFFECTED`: Number of customers affected by the power outage event.
 - `ANOMALY.LEVEL`: Gravity of natural disaster on power outage.
 - `NERC.REGION`: North American Electric Reliability Corporation regions involved in the outage event.
-- `MONTH`: The month when the outage occurred.
+- `POPULATION`: Population in the U.S. state in a year.
+- `CAUSE.CATEGORY`: Categories of all the events causing the major power outages
 
 ## Baseline Model
 
