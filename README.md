@@ -159,36 +159,36 @@ We analyzed the dependency of the missingness of the `OUTAGE.DURATION` column on
 
 | Column                      | Missingness Proportion |
 |-----------------------------|------------------------|
-| OUTAGE_START_DATETIME       | 0.005867               |
-| OUTAGE_RESTORATION_DATETIME | 0.037810               |
-| NERC.REGION                 | 0.000000               |
-| CUSTOMERS.AFFECTED          | 0.288787               |
-| OUTAGE.DURATION             | 0.037810               |
-| CLIMATE.REGION              | 0.003911               |
-| CAUSE.CATEGORY              | 0.000000               |
-| ANOMALY.LEVEL               | 0.005867               |
-| MONTH                       | 0.005867               |
-| OUTAGE_DURATION_MISSING     | 0.000000               |
+| `OUTAGE_START_DATETIME`       | 0.005867               |
+| `OUTAGE_RESTORATION_DATETIME` | 0.037810               |
+| `NERC.REGION`                 | 0.000000               |
+| `CUSTOMERS.AFFECTED`          | 0.288787               |
+| `OUTAGE.DURATION`             | 0.037810               |
+| `CLIMATE.REGION`              | 0.003911               |
+| `CAUSE.CATEGORY`              | 0.000000               |
+| `ANOMALY.LEVEL`               | 0.005867               |
+| `MONTH`                       | 0.005867               |
+| `OUTAGE_DURATION_MISSING`     | 0.000000               |
 
 ### Permutation Test Results
 #### Categorical Column: CAUSE.CATEGORY
-- Observed Statistic: 0.2520091580226147
+- Observed TVD Statistic: 0.2520091580226147
 - P-value: 0.0
 
 #### Categorical Column: CLIMATE.REGION
-- Observed Statistic: 0.2535212947392274
+- Observed TVD Statistic: 0.2535212947392274
 - P-value: 0.004
 
 #### Categorical Column: NERC.REGION
-- Observed Statistic: 0.3153910849453322
+- Observed TVD Statistic: 0.3153910849453322
 - P-value: 0.0
 
 #### Categorical Column: ANOMALY.LEVEL
-- Observed Statistic: 0.4918007853547923
+- Observed TVD Statistic: 0.4918007853547923
 - P-value: 0.0
 
 #### Categorical Column: MONTH
-- Observed Statistic: 0.22267850229522704
+- Observed TVD Statistic: 0.22267850229522704
 - P-value: 0.118
 
 ### Interpretation
