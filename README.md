@@ -295,11 +295,37 @@ To ensure that our model's performance is evaluated on unseen data, we split the
 
 - ```python
     # Split the data into training and test sets (70, 30)
-    X_train, X_test, y_train, y_test = train_test_split(features, target,␣ ↪test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.3)
     ```
 
 ### Model Pipeline
 We constructed a pipeline using `scikit-learn` to streamline the modeling process. The pipeline consists of preprocessing steps for encoding the categorical features and a linear regression model for prediction. The pipeline ensures that the data undergoes consistent preprocessing and modeling steps, making the process more efficient and reproducible.
+
+- ```python
+    # preprocessing for categorical columns
+    cat_processor = Pipeline([
+        ('encoder', OneHotEncoder(handle_unknown='ignore'))
+    ])
+  
+    # Combine preprocessing steps
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ('cat', cat_processor, ['CLIMATE.REGION', "CAUSE.CATEGORY"])
+        ])
+  
+    # Create the pipeline
+    pipeline = Pipeline(steps=[
+       ('preprocessor', preprocessor),
+       ('regressor', LinearRegression())
+    ])
+
+    # Train the model
+    pipeline.fit(X_train, y_train)
+  
+    # Evaluate the model
+    y_pred = pipeline.predict(X_test)
+    print('Test RMSE:', np.sqrt(mean_squared_error(y_test, y_pred)))
+    ```
 
 The pipeline includes the following steps:
 1. **Preprocessor**: This step handles the one-hot encoding of the categorical features `CLIMATE.REGION` and `CAUSE.CATEGORY`.
