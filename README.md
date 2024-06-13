@@ -284,6 +284,11 @@ The features used in our baseline model include both nominal variables. To incor
 
 - **CAUSE.CATEGORY** (Nominal): This feature represents the cause of the outage. Similar to `CLIMATE.REGION`, we applied one-hot encoding to `CAUSE.CATEGORY` to handle its categorical nature. By converting the cause categories into binary columns, the model can effectively process and utilize this information for prediction.
 
+- ```python
+    features = data[['CLIMATE.REGION', "CAUSE.CATEGORY"]]
+    target = data['OUTAGE.DURATION']
+    ```
+
 ### Data Splitting
 To ensure that our model's performance is evaluated on unseen data, we split the dataset into training and test sets. We used a 70-30 split ratio, where 70% of the data was used for training the model, and 30% was reserved for testing. This split helps us assess the model's ability to generalize to new data and prevents overfitting to the training set.
 
